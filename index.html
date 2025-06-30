@@ -650,6 +650,90 @@
         .hero .content h3 {
           font-size: 3.5rem;
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.7);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 2000;
+        }
+
+        .modal-content {
+          background: var(--white);
+          max-width: 90%;
+          width: 80rem;
+          padding: 2rem;
+          border-radius: 1rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          position: relative;
+          box-shadow: var(--box-shadow);
+          animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content img {
+          width: 100%;
+          border-radius: 0.5rem;
+        }
+
+        .modal-image {
+          flex: 1 1 30rem;
+        }
+
+        .modal-details {
+          flex: 1 1 40rem;
+        }
+
+        .modal-details h2 {
+          font-size: 3rem;
+          color: var(--dark);
+        }
+
+        .modal-details p {
+          font-size: 1.6rem;
+          margin: 1rem 0;
+          color: var(--gray-dark);
+        }
+
+        .modal-stars {
+          font-size: 2rem;
+          color: var(--accent);
+          margin-bottom: 1rem;
+        }
+
+        .modal-price {
+          font-size: 2.5rem;
+          color: var(--primary);
+          margin-bottom: 2rem;
+        }
+
+        .close-btn {
+          position: absolute;
+          top: 1rem;
+          right: 1.5rem;
+          font-size: 3rem;
+          color: var(--dark);
+          cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+          from {
+            transform: scale(0.95);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
       }
     </style>
   </head>
@@ -744,9 +828,11 @@
         </form>
         <div class="info">
           <h3>Info Kontak</h3>
-          <p><i class="fas fa-phone"></i> +62 123 4567 890</p>
-          <p><i class="fas fa-envelope"></i> info@seafoodmart.com</p>
-          <p><i class="fas fa-map-marker-alt"></i> Pesisir Utara, Indonesia</p>
+          <p><i class="fas fa-phone"></i>+62 813-3738-8007</p>
+          <p><i class="fas fa-envelope"></i> artomoro@gmail.com</p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> Demak, Jawa Tengah, Indonesia
+          </p>
           <div class="social">
             <a href="#"><i class="fab fa-facebook-f"></i></a>
             <a href="#"><i class="fab fa-twitter"></i></a>
@@ -760,7 +846,7 @@
     <footer>
       <div class="container">
         <div class="footer-box">
-          <h3>SeafoodMart</h3>
+          <h3>Arto Moro Berkah Rezeki</h3>
           <p>Produsen produk laut berkualitas dengan cita rasa khas pesisir.</p>
         </div>
         <div class="footer-box">
@@ -787,7 +873,7 @@
         </div>
       </div>
       <div class="credit">
-        <p>&copy; 2023 SeafoodMart. All Rights Reserved.</p>
+        <p>&copy; 2025 ArtoMoro. All Rights Reserved.</p>
       </div>
     </footer>
 
@@ -952,7 +1038,7 @@
           category: "camilan",
           image: "img/akar_kelapa/bg.jpg",
           stars: 3,
-          desc: "Camilan tradisional dari akar kelapa",
+          desc: "Camilan tradisional akar kelapa",
         },
       ];
 
@@ -1111,6 +1197,64 @@
       // Initialize the page
       document.addEventListener("DOMContentLoaded", () => {
         displayProducts();
+
+        // Modal elements
+        const modal = document.getElementById("product-modal");
+        const modalImg = document.getElementById("modal-img");
+        const modalTitle = document.getElementById("modal-title");
+        const modalDesc = document.getElementById("modal-desc");
+        const modalStars = document.getElementById("modal-stars");
+        const modalPrice = document.getElementById("modal-price");
+        const modalAdd = document.getElementById("modal-add");
+        const modalClose = document.querySelector(".close-btn");
+
+        // Open modal function
+        function showProductDetail(product) {
+          modalImg.src = product.image;
+          modalTitle.textContent = product.name;
+          modalDesc.textContent = product.desc;
+          modalStars.innerHTML =
+            "★".repeat(product.stars) + "☆".repeat(5 - product.stars);
+          modalPrice.textContent =
+            "Rp " + product.price.toLocaleString("id-ID");
+          modalAdd.setAttribute("data-id", product.id);
+          modal.style.display = "flex";
+        }
+
+        // Close modal
+        modalClose.onclick = () => {
+          modal.style.display = "none";
+        };
+
+        // Close modal on outside click
+        window.onclick = (e) => {
+          if (e.target === modal) modal.style.display = "none";
+        };
+
+        // Tambahkan event ke "Lihat Produk"
+        document.addEventListener("DOMContentLoaded", () => {
+          displayProducts();
+          document.querySelectorAll(".view-product").forEach((button) => {
+            button.addEventListener("click", (e) => {
+              e.preventDefault();
+              const productId = button.getAttribute("href").replace("#", "");
+              const product = products.find(
+                (p) => p.name.toLowerCase().replace(/ /g, "-") === productId
+              );
+              if (product) {
+                showProductDetail(product);
+              }
+            });
+          });
+
+          // Tambah ke keranjang dari modal
+          modalAdd.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = parseInt(modalAdd.getAttribute("data-id"));
+            addToCart(id);
+            modal.style.display = "none";
+          });
+        });
       });
     </script>
   </body>
