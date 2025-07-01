@@ -766,7 +766,7 @@
           <!-- Items will be added dynamically -->
         </div>
         <div class="total">Total: Rp <span>0</span></div>
-        <a href="#" class="btn">Checkout</a>
+        <a href="#" class="btn" onclick="checkoutWA()">Checkout</a>
       </div>
     </header>
 
@@ -842,7 +842,7 @@
               href="https://www.instagram.com/abdulmuiz994?igsh=YzZ6NzRidjlpZDQ="
               ><i class="fab fa-instagram"></i
             ></a>
-            <a href="https://wa.me/+62 813-3738-8007"
+            <a href="https://wa.me/081337388007"
               ><i class="fab fa-whatsapp"></i
             ></a>
           </div>
@@ -1261,6 +1261,52 @@
           });
         });
       });
+
+      function checkoutWA() {
+        if (cart.length === 0) {
+          alert("Keranjang masih kosong!");
+          return;
+        }
+
+        const nama = prompt("Nama lengkap:");
+        if (!nama) return;
+
+        const desa = prompt("Desa / Kelurahan:");
+        if (!desa) return;
+
+        const kecamatan = prompt("Kecamatan:");
+        if (!kecamatan) return;
+
+        const kabupaten = prompt("Kabupaten / Kota:");
+        if (!kabupaten) return;
+
+        const provinsi = prompt("Provinsi:");
+        if (!provinsi) return;
+
+        const kodepos = prompt("Kode Pos:");
+        if (!kodepos) return;
+
+        let pesan = `Halo, saya ingin memesan produk berikut:\n\n`;
+
+        let totalHarga = 0;
+        cart.forEach((item, index) => {
+          const subtotal = item.price * item.quantity;
+          totalHarga += subtotal;
+          pesan += `${index + 1}. ${item.name} x ${
+            item.quantity
+          } = Rp ${subtotal.toLocaleString("id-ID")}\n`;
+        });
+
+        pesan += `\nTotal Harga: Rp ${totalHarga.toLocaleString("id-ID")}\n`;
+
+        pesan += `\nNama: ${nama}\nAlamat:\nDesa/Kel: ${desa}\nKecamatan: ${kecamatan}\nKab/Kota: ${kabupaten}\nProvinsi: ${provinsi}\nKode Pos: ${kodepos}`;
+
+        const nomorWA = "6281234567890"; // Ganti dengan nomor WA penjual
+        const url = `https://wa.me/${nomorWA}?text=${encodeURIComponent(
+          pesan
+        )}`;
+        window.open(url, "_blank");
+      }
     </script>
   </body>
 </html>
