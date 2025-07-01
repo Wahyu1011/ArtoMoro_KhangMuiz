@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Peyek - Detail Produk</title>
+    <title>Toko Online Produk Laut - Segar dan Berkualitas</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
     <style>
+      /* Global Styles */
       :root {
         --primary: #1a5f7a;
         --secondary: #57c5b6;
@@ -17,7 +18,7 @@
         --light: #f5f5f5;
         --white: #ffffff;
         --gray: #e0e0e0;
-        --gray-dark: #555;
+        --gray-dark: #777777;
         --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         --transition: all 0.3s ease;
       }
@@ -27,157 +28,1232 @@
         padding: 0;
         box-sizing: border-box;
         font-family: "Poppins", sans-serif;
+        text-decoration: none;
+        list-style: none;
+        outline: none;
+        border: none;
+      }
+
+      html {
+        font-size: 62.5%;
+        scroll-behavior: smooth;
+        scroll-padding-top: 7rem;
+        overflow-x: hidden;
       }
 
       body {
         background-color: var(--white);
         color: var(--dark);
-        padding: 1rem;
+        overflow-x: hidden;
       }
 
-      .product-detail {
-        max-width: 500px;
-        margin: auto;
-        background: var(--light);
-        padding: 1.5rem;
-        border-radius: 0.5rem;
-        box-shadow: var(--box-shadow);
-      }
-
-      .product-detail h1 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-        text-align: center;
-      }
-
-      .slider {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        border-radius: 0.5rem;
-        margin-bottom: 1rem;
-      }
-
-      .slides {
-        display: flex;
-        transition: transform 0.5s ease;
-      }
-
-      .slides img {
-        width: 100%;
-        flex-shrink: 0;
-        object-fit: cover;
-        border-radius: 0.5rem;
-      }
-
-      .nav-buttons {
-        display: flex;
-        justify-content: center;
-        margin-top: 0.5rem;
-      }
-
-      .nav-buttons button {
-        width: 10px;
-        height: 10px;
-        margin: 0 3px;
-        border: none;
-        border-radius: 50%;
-        background: var(--gray);
-        cursor: pointer;
-        transition: background 0.3s;
-      }
-
-      .nav-buttons button.active {
-        background: var(--primary);
-      }
-
-      .stars {
-        font-size: 1.2rem;
-        color: var(--accent);
-        margin: 0.5rem 0;
-        text-align: center;
-      }
-
-      .desc {
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: var(--gray-dark);
-        margin-bottom: 1rem;
-        text-align: justify;
-      }
-
-      .price {
-        font-size: 1.3rem;
-        color: var(--primary);
-        font-weight: 700;
-        margin-bottom: 1rem;
-        text-align: center;
+      section {
+        padding: 5rem 9%;
       }
 
       .btn {
-        display: block;
-        width: 100%;
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 1rem 3rem;
         background: var(--primary);
         color: var(--white);
-        padding: 0.7rem;
-        border-radius: 0.4rem;
-        font-size: 1rem;
         cursor: pointer;
+        border-radius: 0.5rem;
+        font-size: 1.7rem;
         transition: var(--transition);
-        text-align: center;
-        text-decoration: none;
       }
 
       .btn:hover {
         background: var(--secondary);
+        transform: translateY(-3px);
+        box-shadow: var(--box-shadow);
+      }
+
+      .heading {
+        text-align: center;
+        margin-bottom: 4rem;
+        font-size: 3.5rem;
+        color: var(--dark);
+      }
+
+      .heading span {
+        color: var(--primary);
+      }
+
+      /* Header Styles */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: var(--white);
+        box-shadow: var(--box-shadow);
+        padding: 1.5rem 9%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      header .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      header .logo img {
+        height: 4rem;
+        margin-right: 1rem;
+      }
+
+      header .logo h1 {
+        font-size: 2.5rem;
+        color: var(--dark);
+      }
+
+      header .logo h1 span {
+        color: var(--primary);
+      }
+
+      header .navbar ul {
+        display: flex;
+      }
+
+      header .navbar ul li {
+        margin-left: 2rem;
+      }
+
+      header .navbar ul li a {
+        font-size: 1.7rem;
+        color: var(--dark);
+        padding: 0.5rem 1.5rem;
+        border-radius: 0.5rem;
+        transition: var(--transition);
+      }
+
+      header .navbar ul li a.active,
+      header .navbar ul li a:hover {
+        background: var(--primary);
+        color: var(--white);
+      }
+
+      header .icons i {
+        font-size: 2.5rem;
+        color: var(--dark);
+        margin-left: 1.5rem;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+
+      header .icons i:hover {
+        color: var(--primary);
+      }
+
+      header .search-form {
+        position: absolute;
+        top: 110%;
+        right: -110%;
+        width: 50rem;
+        height: 5rem;
+        background: var(--white);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+      }
+
+      header .search-form.active {
+        right: 2rem;
+      }
+
+      header .search-form input {
+        width: 100%;
+        height: 100%;
+        background: none;
+        text-transform: none;
+        font-size: 1.6rem;
+        color: var(--dark);
+        padding: 0 1.5rem;
+      }
+
+      header .search-form label {
+        font-size: 2.2rem;
+        padding-right: 1.5rem;
+        color: var(--dark);
+        cursor: pointer;
+      }
+
+      header .search-form label:hover {
+        color: var(--primary);
+      }
+
+      header .shopping-cart {
+        position: absolute;
+        top: 110%;
+        right: -110%;
+        padding: 1rem;
+        background: var(--white);
+        border-radius: 0.5rem;
+        box-shadow: var(--box-shadow);
+        width: 35rem;
+        transition: var(--transition);
+      }
+
+      header .shopping-cart.active {
+        right: 2rem;
+      }
+
+      header .shopping-cart .cart-items {
+        max-height: 50vh;
+        overflow-y: auto;
+      }
+
+      header .shopping-cart .cart-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--gray);
+        position: relative;
+      }
+
+      header .shopping-cart .cart-item img {
+        height: 7rem;
+        width: 7rem;
+        object-fit: cover;
+      }
+
+      header .shopping-cart .cart-item .content h3 {
+        font-size: 1.6rem;
+        color: var(--dark);
+        padding-bottom: 0.5rem;
+      }
+
+      header .shopping-cart .cart-item .content .price {
+        font-size: 1.5rem;
+        color: var(--primary);
+      }
+
+      header .shopping-cart .cart-item .trash {
+        position: absolute;
+        right: 1rem;
+        font-size: 2rem;
+        color: var(--gray-dark);
+        cursor: pointer;
+      }
+
+      header .shopping-cart .cart-item .trash:hover {
+        color: var(--primary);
+      }
+
+      header .shopping-cart .total {
+        font-size: 2rem;
+        padding: 1rem 0;
+        text-align: center;
+        color: var(--dark);
+      }
+
+      #menu-btn {
+        display: none;
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("img/bg.jpg") no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin-top: 7rem;
+      }
+
+      .hero .content {
+        max-width: 60rem;
+        padding: 0 2rem;
+      }
+
+      .hero .content h3 {
+        font-size: 6rem;
+        color: var(--white);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .hero .content p {
+        font-size: 2rem;
+        color: var(--white);
+        line-height: 1.8;
+        padding: 1rem 0;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Products Section */
+      .products .filter-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+      }
+
+      .products .filter-buttons .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1.5rem;
+      }
+
+      .products .filter-buttons .btn.active {
+        background: var(--secondary);
+      }
+
+      .products .box-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+        gap: 2rem;
+      }
+
+      .products .box-container .box {
+        background: var(--light);
+        border-radius: 0.5rem;
+        padding: 2rem;
+        text-align: center;
+        box-shadow: var(--box-shadow);
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition);
+      }
+
+      .products .box-container .box:hover {
+        transform: translateY(-5px);
+      }
+
+      .products .box-container .box .image {
+        height: 25rem;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 0.5rem;
+      }
+
+      .products .box-container .box .image img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .products .box-container .box:hover .image img {
+        transform: scale(1.1);
+      }
+
+      .products .box-container .box .content {
+        padding: 1.5rem 0;
+      }
+
+      .products .box-container .box .content h3 {
+        font-size: 2rem;
+        color: var(--dark);
+        margin-bottom: 1rem;
+      }
+
+      .products .box-container .box .content .price {
+        font-size: 2rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+      }
+
+      .products .box-container .box .content .stars {
+        font-size: 1.7rem;
+        color: var(--accent);
+        margin-bottom: 1rem;
+      }
+
+      .products .box-container .box .content .btn-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .products .box-container .box .content .btn-container .btn {
+        width: 100%;
+        margin: 0;
+      }
+
+      /* About Section */
+      .about {
+        background: var(--light);
+      }
+
+      .about .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      .about .row .image {
+        flex: 1 1 40rem;
+      }
+
+      .about .row .image img {
+        width: 100%;
+        border-radius: 0.5rem;
+      }
+
+      .about .row .content {
+        flex: 1 1 40rem;
+      }
+
+      .about .row .content h3 {
+        font-size: 3rem;
+        color: var(--dark);
+        margin-bottom: 1.5rem;
+      }
+
+      .about .row .content p {
+        font-size: 1.6rem;
+        color: var(--gray-dark);
+        line-height: 1.8;
+        padding: 1rem 0;
+      }
+
+      /* Contact Section */
+      .contact .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
+      }
+
+      .contact .row form {
+        flex: 1 1 40rem;
+        padding: 2rem;
+        background: var(--light);
+        border-radius: 0.5rem;
+      }
+
+      .contact .row form .inputBox {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .contact .row form .inputBox input {
+        width: 49%;
+        margin: 1rem 0;
+        padding: 1.2rem;
+        font-size: 1.6rem;
+        color: var(--dark);
+        background: var(--white);
+        border-radius: 0.5rem;
+        box-shadow: var(--box-shadow);
+      }
+
+      .contact .row form textarea {
+        width: 100%;
+        margin: 1rem 0;
+        padding: 1.2rem;
+        font-size: 1.6rem;
+        color: var(--dark);
+        background: var(--white);
+        border-radius: 0.5rem;
+        box-shadow: var(--box-shadow);
+        resize: none;
+        height: 15rem;
+      }
+
+      .contact .row .info {
+        flex: 1 1 40rem;
+      }
+
+      .contact .row .info h3 {
+        font-size: 3rem;
+        color: var(--dark);
+        margin-bottom: 1.5rem;
+      }
+
+      .contact .row .info p {
+        font-size: 1.6rem;
+        color: var(--gray-dark);
+        line-height: 1.8;
+        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .contact .row .info p i {
+        margin-right: 1rem;
+        color: var(--primary);
+      }
+
+      .contact .row .info .social {
+        margin-top: 2rem;
+      }
+
+      .contact .row .info .social a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 4rem;
+        width: 4rem;
+        background: var(--primary);
+        color: var(--white);
+        border-radius: 50%;
+        font-size: 1.8rem;
+        margin-right: 1rem;
+        transition: var(--transition);
+      }
+
+      .contact .row .info .social a:hover {
+        background: var(--secondary);
+        transform: translateY(-3px);
+      }
+
+      /* Footer Section */
+      footer {
+        background: var(--dark);
+        padding: 3rem 9%;
+      }
+
+      footer .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        gap: 2rem;
+      }
+
+      footer .container .footer-box h3 {
+        font-size: 2.2rem;
+        color: var(--white);
+        padding: 1rem 0;
+      }
+
+      footer .container .footer-box p,
+      footer .container .footer-box a {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--gray);
+        padding: 1rem 0;
+      }
+
+      footer .container .footer-box a:hover {
+        color: var(--secondary);
+      }
+
+      footer .container .footer-box form input {
+        width: 100%;
+        padding: 1.2rem;
+        font-size: 1.6rem;
+        color: var(--dark);
+        margin: 1rem 0;
+        border-radius: 0.5rem;
+      }
+
+      footer .credit {
+        text-align: center;
+        padding-top: 3rem;
+        margin-top: 3rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 1.6rem;
+        color: var(--gray);
+      }
+
+      /* Alert Styles */
+      .alert {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        background: var(--secondary);
+        color: white;
+        border-radius: 5px;
+        z-index: 1001;
+        animation: slideIn 0.5s, fadeOut 0.5s 2.5s;
+        font-size: 1.6rem;
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+
+      /* Media Queries */
+      @media (max-width: 991px) {
+        html {
+          font-size: 55%;
+        }
+
+        header {
+          padding: 1.5rem 2rem;
+        }
+
+        section {
+          padding: 3rem 2rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #menu-btn {
+          display: inline-block;
+        }
+
+        header .navbar {
+          position: absolute;
+          top: 99%;
+          left: 0;
+          right: 0;
+          background: var(--white);
+          clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+          transition: var(--transition);
+        }
+
+        header .navbar.active {
+          clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+
+        header .navbar ul {
+          display: block;
+          margin: 2rem;
+        }
+
+        header .navbar ul li {
+          margin: 1.5rem 0;
+        }
+
+        .contact .row form .inputBox input {
+          width: 100%;
+        }
+
+        .hero .content h3 {
+          font-size: 4.5rem;
+        }
+      }
+
+      @media (max-width: 450px) {
+        html {
+          font-size: 50%;
+        }
+
+        .hero .content h3 {
+          font-size: 3.5rem;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.7);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 2000;
+        }
+
+        .modal-content {
+          background: var(--white);
+          max-width: 90%;
+          width: 80rem;
+          padding: 2rem;
+          border-radius: 1rem;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 2rem;
+          position: relative;
+          box-shadow: var(--box-shadow);
+          animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content img {
+          width: 100%;
+          border-radius: 0.5rem;
+        }
+
+        .modal-image {
+          flex: 1 1 30rem;
+        }
+
+        .modal-details {
+          flex: 1 1 40rem;
+        }
+
+        .modal-details h2 {
+          font-size: 3rem;
+          color: var(--dark);
+        }
+
+        .modal-details p {
+          font-size: 1.6rem;
+          margin: 1rem 0;
+          color: var(--gray-dark);
+        }
+
+        .modal-stars {
+          font-size: 2rem;
+          color: var(--accent);
+          margin-bottom: 1rem;
+        }
+
+        .modal-price {
+          font-size: 2.5rem;
+          color: var(--primary);
+          margin-bottom: 2rem;
+        }
+
+        .close-btn {
+          position: absolute;
+          top: 1rem;
+          right: 1.5rem;
+          font-size: 3rem;
+          color: var(--dark);
+          cursor: pointer;
+        }
+
+        @keyframes fadeIn {
+          from {
+            transform: scale(0.95);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
       }
     </style>
   </head>
   <body>
-    <div class="product-detail">
-      <h1>Peyek Kacang</h1>
-      <div class="slider">
-        <div class="slides" id="slides">
-          <img src="img/peyek/bg.jpg" alt="Peyek 1" />
-          <img src="img/peyek/1.jpg" alt="Peyek 1" />
-          <img src="img/peyek/2.jpg" alt="Peyek 2" />
-          <img src="img/peyek/3.jpg" alt="Peyek 3" />
-        </div>
-        <div class="nav-buttons" id="nav-buttons"></div>
+    <header>
+      <div class="logo">
+        <img src="img/logo.png" alt="Logo" />
+        <h1>Arto Moro_<span>Berkah Rezeki</span></h1>
       </div>
-      <div class="stars">⭐⭐⭐⭐</div>
-      <p class="desc">
-        Peyek kacang yang renyah dan gurih, digoreng dengan minyak segar dan
-        bumbu khas rumahan. Cocok buat camilan santai, suguhan tamu, atau teman
-        makan pecel.
-      </p>
-      <div class="price">Rp 8.000</div>
-      <a href="index.html" class="btn"
-        ><i class="fas fa-cart-plus"></i> Tambah ke Keranjang</a
-      >
-    </div>
+      <nav class="navbar">
+        <ul>
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#produk">Produk</a></li>
+          <li><a href="#tentang">Tentang Kami</a></li>
+          <li><a href="#kontak">Kontak</a></li>
+        </ul>
+      </nav>
+      <div class="icons">
+        <i class="fas fa-search" id="search-btn"></i>
+        <i class="fas fa-shopping-cart" id="cart-btn"></i>
+        <i class="fas fa-user" id="login-btn"></i>
+        <i class="fas fa-bars" id="menu-btn"></i>
+      </div>
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="Cari produk..." />
+        <label for="search-box" class="fas fa-search"></label>
+      </div>
+      <div class="shopping-cart">
+        <div class="cart-items">
+          <!-- Items will be added dynamically -->
+        </div>
+        <div class="total">Total: Rp <span>0</span></div>
+        <a href="#" class="btn">Checkout</a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="content">
+        <h3>Produk Laut Segar Berkualitas</h3>
+        <p>Temukan berbagai produk laut khas dengan cita rasa terbaik</p>
+        <a href="#produk" class="btn">Belanja Sekarang</a>
+      </div>
+    </section>
+
+    <section class="products" id="produk">
+      <h1 class="heading">Produk <span>Kami</span></h1>
+      <div class="filter-buttons">
+        <button class="btn active" data-filter="all">Semua</button>
+        <button class="btn" data-filter="olahan">Olahan Ikan</button>
+        <button class="btn" data-filter="kerupuk">Kerupuk</button>
+        <button class="btn" data-filter="camilan">Camilan</button>
+      </div>
+      <div class="box-container">
+        <!-- Products will be added dynamically -->
+      </div>
+    </section>
+
+    <section class="about" id="tentang">
+      <h1 class="heading">Tentang <span>Kami</span></h1>
+      <div class="row">
+        <div class="content">
+          <h3>Kenapa Memilih Produk Kami?</h3>
+          <p>
+            Kami adalah produsen produk laut yang telah berpengalaman lebih dari
+            10 tahun. Semua produk kami dibuat dengan bahan baku segar dan
+            proses pengolahan yang higienis.
+          </p>
+          <p>
+            Kami mengutamakan kualitas dan cita rasa khas produk laut asli
+            Indonesia. Setiap produk melalui proses seleksi ketat sebelum sampai
+            ke tangan pelanggan.
+          </p>
+          <a href="#" class="btn">Baca Selengkapnya</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="kontak">
+      <h1 class="heading">Kontak <span>Kami</span></h1>
+      <div class="row">
+        <form action="">
+          <div class="inputBox">
+            <input type="text" placeholder="Nama" />
+            <input type="email" placeholder="Email" />
+          </div>
+          <div class="inputBox">
+            <input type="number" placeholder="Nomor HP" />
+            <input type="text" placeholder="Subjek" />
+          </div>
+          <textarea placeholder="Pesan Anda" cols="30" rows="10"></textarea>
+          <input type="submit" value="Kirim Pesan" class="btn" />
+        </form>
+        <div class="info">
+          <h3>Info Kontak</h3>
+          <p><i class="fas fa-phone"></i>+62 813-3738-8007</p>
+          <p><i class="fas fa-envelope"></i> artomoro@gmail.com</p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i> Demak, Jawa Tengah, Indonesia
+          </p>
+          <div class="social">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-box">
+          <h3>Arto Moro Berkah Rezeki</h3>
+          <p>Produsen produk laut berkualitas dengan cita rasa khas pesisir.</p>
+        </div>
+        <div class="footer-box">
+          <h3>Link Cepat</h3>
+          <a href="#">Home</a>
+          <a href="#produk">Produk</a>
+          <a href="#tentang">Tentang Kami</a>
+          <a href="#kontak">Kontak</a>
+        </div>
+        <div class="footer-box">
+          <h3>Layanan</h3>
+          <a href="#">Garansi Produk</a>
+          <a href="#">Pengembalian</a>
+          <a href="#">Pembayaran</a>
+          <a href="#">Pengiriman</a>
+        </div>
+        <div class="footer-box">
+          <h3>Newsletter</h3>
+          <p>Berlangganan untuk mendapatkan promo terbaru</p>
+          <form action="">
+            <input type="email" placeholder="Email Anda" />
+            <button type="submit" class="btn">Berlangganan</button>
+          </form>
+        </div>
+      </div>
+      <div class="credit">
+        <p>&copy; 2025 ArtoMoro. All Rights Reserved.</p>
+      </div>
+    </footer>
 
     <script>
-      const slides = document.getElementById("slides");
-      const navButtons = document.getElementById("nav-buttons");
-      const totalSlides = slides.children.length;
-      let currentIndex = 0;
+      // DOM Elements
+      const menuBtn = document.querySelector("#menu-btn");
+      const navbar = document.querySelector(".navbar");
+      const searchBtn = document.querySelector("#search-btn");
+      const searchForm = document.querySelector(".search-form");
+      const cartBtn = document.querySelector("#cart-btn");
+      const shoppingCart = document.querySelector(".shopping-cart");
+      const loginBtn = document.querySelector("#login-btn");
+      const filterButtons = document.querySelectorAll(".filter-buttons .btn");
+      const productBox = document.querySelector(".box-container");
 
-      function goToSlide(index) {
-        slides.style.transform = `translateX(-${index * 100}%)`;
-        [...navButtons.children].forEach((btn) =>
-          btn.classList.remove("active")
-        );
-        navButtons.children[index].classList.add("active");
-        currentIndex = index;
+      // Toggle Menu
+      menuBtn.onclick = () => {
+        navbar.classList.toggle("active");
+        searchForm.classList.remove("active");
+        shoppingCart.classList.remove("active");
+      };
+
+      // Toggle Search Form
+      searchBtn.onclick = () => {
+        searchForm.classList.toggle("active");
+        navbar.classList.remove("active");
+        shoppingCart.classList.remove("active");
+      };
+
+      // Toggle Shopping Cart
+      cartBtn.onclick = () => {
+        shoppingCart.classList.toggle("active");
+        navbar.classList.remove("active");
+        searchForm.classList.remove("active");
+      };
+
+      // Remove active classes when scrolling
+      window.onscroll = () => {
+        navbar.classList.remove("active");
+        searchForm.classList.remove("active");
+        shoppingCart.classList.remove("active");
+      };
+
+      // Filter Products
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Remove active class from all buttons
+          filterButtons.forEach((btn) => btn.classList.remove("active"));
+          // Add active class to clicked button
+          button.classList.add("active");
+
+          const filter = button.getAttribute("data-filter");
+
+          document
+            .querySelectorAll(".box-container .box")
+            .forEach((product) => {
+              if (filter === "all" || product.classList.contains(filter)) {
+                product.style.display = "block";
+              } else {
+                product.style.display = "none";
+              }
+            });
+        });
+      });
+
+      // Product Data
+      const products = [
+        {
+          id: 1,
+          name: "Stik Ikan Layur",
+          price: 25000,
+          category: "olahan",
+          image: "img/stik_ikanlayur/bg.jpg",
+          stars: 4,
+          desc: "Stik ikan layur gurih dengan tekstur renyah",
+        },
+        {
+          id: 2,
+          name: "Kerupuk Cumi Khas Pesisir",
+          price: 18000,
+          category: "kerupuk",
+          image: "img/kerupuk_cumikhaspesisir/bg.jpg",
+          stars: 5,
+          desc: "Kerupuk cumi dengan cita rasa laut yang autentik",
+        },
+        {
+          id: 3,
+          name: "Kerupuk Udang Khas Pesisir",
+          price: 20000,
+          category: "kerupuk",
+          image: "img/kerupuk_udangkhaspesisir/bg.jpg",
+          stars: 4,
+          desc: "Kerupuk udang dengan kandungan udang asli",
+        },
+        {
+          id: 4,
+          name: "Gereh Ikan Kadalan",
+          price: 35000,
+          category: "olahan",
+          image: "img/gereh_ikankadalan/bg.jpg",
+          stars: 5,
+          desc: "Ikan kadalan asin dengan cita rasa khas",
+        },
+        {
+          id: 5,
+          name: "Blenyek Teri",
+          price: 15000,
+          category: "camilan",
+          image: "img/blenyek_teri/bg.jpg",
+          stars: 4,
+          desc: "Teri kecil gurih dengan bumbu rempah",
+        },
+        {
+          id: 6,
+          name: "Dendeng Ikan Manis",
+          price: 30000,
+          category: "olahan",
+          image: "img/dendeng_ikanmanis/bg.jpg",
+          stars: 5,
+          desc: "Dendeng ikan dengan tekstur kenyal dan gurih",
+        },
+        {
+          id: 7,
+          name: "Gereh Gurih",
+          price: 28000,
+          category: "olahan",
+          image: "img/gereh_gurih/bg.jpg",
+          stars: 4,
+          desc: "Ikan asin dengan rasa gurih alami",
+        },
+        {
+          id: 8,
+          name: "Gereh Layur",
+          price: 32000,
+          category: "olahan",
+          image: "img/gereh_layur/bg.jpg",
+          stars: 5,
+          desc: "Ikan layur asin dengan tekstur lembut",
+        },
+        {
+          id: 9,
+          name: "Teri Jengki",
+          price: 22000,
+          category: "camilan",
+          image: "img/teri_jengki/bg.jpg",
+          stars: 4,
+          desc: "Teri jengki kering dengan rasa gurih",
+        },
+        {
+          id: 10,
+          name: "Peyek",
+          price: 12000,
+          category: "camilan",
+          image: "img/peyek/bg.jpg",
+          stars: 4,
+          desc: "Peyek kacang dengan taburan ikan teri",
+        },
+        {
+          id: 11,
+          name: "Akar Kelapa",
+          price: 10000,
+          category: "camilan",
+          image: "img/akar_kelapa/bg.jpg",
+          stars: 3,
+          desc: "Camilan tradisional akar kelapa",
+        },
+      ];
+
+      // Display Products
+      function displayProducts() {
+        productBox.innerHTML = "";
+
+        products.forEach((product) => {
+          const stars =
+            "★".repeat(product.stars) + "☆".repeat(5 - product.stars);
+          const productId = product.name.toLowerCase().replace(/ /g, "-");
+
+          const productElement = document.createElement("div");
+          productElement.classList.add("box");
+          productElement.classList.add(product.category);
+          productElement.id = productId;
+
+          productElement.innerHTML = `
+            <div class="image">
+              <img src="${product.image}" alt="${product.name}">
+            </div>
+            <div class="content">
+              <h3>${product.name}</h3>
+              <p class="desc">${product.desc}</p>
+              <div class="stars">${stars}</div>
+              <div class="price">Rp ${product.price.toLocaleString("id-ID")}
+            </div>
+              <div class="btn-container">
+                <a href="${productId}.html" class="btn view-product" target="_blank">Lihat Produk</a>
+                <a href="#" class="btn add-to-cart" data-id="${
+                  product.id
+                }">Tambah ke Keranjang</a>
+              </div>
+            </div>
+          `;
+
+          productBox.appendChild(productElement);
+        });
+
+        // Add event listeners to "View Product" buttons
+        document.querySelectorAll(".view-product").forEach((button) => {
+          button.addEventListener("click", (e) => {
+            const productId = button.getAttribute("href");
+
+            // Scroll to product
+            document.querySelector(productId).scrollIntoView({
+              behavior: "smooth",
+            });
+
+            // Highlight the product
+            document.querySelectorAll(".box").forEach((box) => {
+              box.style.boxShadow = "none";
+            });
+            document.querySelector(productId).style.boxShadow =
+              "0 0 20px var(--accent)";
+
+            // Remove highlight after 2 seconds
+            setTimeout(() => {
+              document.querySelector(productId).style.boxShadow =
+                "var(--box-shadow)";
+            }, 2000);
+          });
+        });
+
+        // Add event listeners to "Add to Cart" buttons
+        document.querySelectorAll(".add-to-cart").forEach((button) => {
+          button.addEventListener("click", (e) => {
+            e.preventDefault();
+            const productId = parseInt(button.getAttribute("data-id"));
+            addToCart(productId);
+          });
+        });
       }
 
-      for (let i = 0; i < totalSlides; i++) {
-        const btn = document.createElement("button");
-        if (i === 0) btn.classList.add("active");
-        btn.addEventListener("click", () => goToSlide(i));
-        navButtons.appendChild(btn);
+      // Cart functionality
+      let cart = [];
+
+      function addToCart(productId) {
+        const product = products.find((p) => p.id === productId);
+        if (product) {
+          const existingItem = cart.find((item) => item.id === productId);
+
+          if (existingItem) {
+            existingItem.quantity += 1;
+          } else {
+            cart.push({
+              ...product,
+              quantity: 1,
+            });
+          }
+
+          updateCart();
+          showAlert(`${product.name} telah ditambahkan ke keranjang`);
+        }
       }
+
+      function removeFromCart(productId) {
+        cart = cart.filter((item) => item.id !== productId);
+        updateCart();
+      }
+
+      function updateCart() {
+        const cartItems = document.querySelector(".cart-items");
+        const totalElement = document.querySelector(".total span");
+
+        cartItems.innerHTML = "";
+
+        let total = 0;
+
+        cart.forEach((item) => {
+          total += item.price * item.quantity;
+
+          const cartItem = document.createElement("div");
+          cartItem.classList.add("cart-item");
+
+          cartItem.innerHTML = `
+            <img src="${item.image}" alt="${item.name}">
+            <div class="content">
+              <h3>${item.name}</h3>
+              <div class="price">Rp ${item.price.toLocaleString("id-ID")} x ${
+            item.quantity
+          }</div>
+            </div>
+            <i class="fas fa-trash trash" data-id="${item.id}"></i>
+          `;
+
+          cartItems.appendChild(cartItem);
+        });
+
+        totalElement.textContent = total.toLocaleString("id-ID");
+
+        // Add event listeners to trash icons
+        document.querySelectorAll(".trash").forEach((icon) => {
+          icon.addEventListener("click", () => {
+            const productId = parseInt(icon.getAttribute("data-id"));
+            removeFromCart(productId);
+          });
+        });
+      }
+
+      // Show alert
+      function showAlert(message) {
+        const alert = document.createElement("div");
+        alert.classList.add("alert");
+        alert.textContent = message;
+
+        document.body.appendChild(alert);
+
+        setTimeout(() => {
+          alert.remove();
+        }, 3000);
+      }
+
+      // Initialize the page
+      document.addEventListener("DOMContentLoaded", () => {
+        displayProducts();
+
+        // Modal elements
+        const modal = document.getElementById("product-modal");
+        const modalImg = document.getElementById("modal-img");
+        const modalTitle = document.getElementById("modal-title");
+        const modalDesc = document.getElementById("modal-desc");
+        const modalStars = document.getElementById("modal-stars");
+        const modalPrice = document.getElementById("modal-price");
+        const modalAdd = document.getElementById("modal-add");
+        const modalClose = document.querySelector(".close-btn");
+
+        // Open modal function
+        function showProductDetail(product) {
+          modalImg.src = product.image;
+          modalTitle.textContent = product.name;
+          modalDesc.textContent = product.desc;
+          modalStars.innerHTML =
+            "★".repeat(product.stars) + "☆".repeat(5 - product.stars);
+          modalPrice.textContent =
+            "Rp " + product.price.toLocaleString("id-ID");
+          modalAdd.setAttribute("data-id", product.id);
+          modal.style.display = "flex";
+        }
+
+        // Close modal
+        modalClose.onclick = () => {
+          modal.style.display = "none";
+        };
+
+        // Close modal on outside click
+        window.onclick = (e) => {
+          if (e.target === modal) modal.style.display = "none";
+        };
+
+        // Tambahkan event ke "Lihat Produk"
+        document.addEventListener("DOMContentLoaded", () => {
+          displayProducts();
+          document.querySelectorAll(".view-product").forEach((button) => {
+            button.addEventListener("click", (e) => {
+              e.preventDefault();
+              const productId = button.getAttribute("href").replace("#", "");
+              const product = products.find(
+                (p) => p.name.toLowerCase().replace(/ /g, "-") === productId
+              );
+              if (product) {
+                showProductDetail(product);
+              }
+            });
+          });
+
+          // Tambah ke keranjang dari modal
+          modalAdd.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = parseInt(modalAdd.getAttribute("data-id"));
+            addToCart(id);
+            modal.style.display = "none";
+          });
+        });
+      });
     </script>
   </body>
 </html>
